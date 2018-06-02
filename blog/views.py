@@ -58,7 +58,7 @@ class IndexView(ListView):
     template_name = 'blog/index.html'
     context_object_name = 'post_list'
     # 指定 paginate_by 属性后开启分页功能，其值代表每一页包含多少篇文章
-    paginate_by = 3
+    paginate_by = 4
 
     # paginator ，即 Paginator 的实例。
     # page_obj ，当前请求页面分页对象。
