@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Black &amp; White</title>
+    <title>fudonglai</title>
 
     <!-- meta -->
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-5 col-xs-8">
                 <div class="logo">
-                    <h1><a href="{% url 'blog:index' %}"><b>Black</b> &amp; White</a></h1>
+                    <h1><a href="{% url 'blog:index' %}"><b>Python</b> &amp; Django</a></h1>
                 </div>
             </div><!-- col-md-4 -->
             <div class="col-md-8 col-sm-7 col-xs-4">
@@ -43,7 +43,7 @@
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="cl-effect-11"><a href="index.html" data-hover="首页">首页</a></li>
+                            <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
                             <li class="cl-effect-11"><a href="full-width.html" data-hover="博客">博客</a></li>
                             <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
                             <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li>
@@ -53,10 +53,12 @@
                 <div id="header-search-box">
                     <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
                     <div id="search-form" class="search-form">
-                        <form role="search" method="get" id="searchform" action="#">
-                            <input type="search" placeholder="搜索" required>
+                        {#加一个name属性才能取出输入的查询文字#}
+                        <form role="search" method="get" id="searchform" action="{% url 'blog:search' %}">
+                            <input type="search" name="q" placeholder="搜索" required>
                             <button type="submit"><span class="ion-ios-search-strong"></span></button>
                         </form>
+
                     </div>
                 </div>
             </div><!-- col-md-8 -->
@@ -107,11 +109,13 @@
 
                 <div class="widget widget-category">
                     <h3 class="widget-title">分类</h3>
-                    {% get_category as category_list %}
+                    {% get_categories as category_list %}
                     <ul>
                         {% for category in category_list %}
                         <li>
-                            <a href="{% url 'blog:category' category.pk %}">{{ category.name }}<span class="post-count">(13)</span></a>
+                            <a href="{% url 'blog:category' category.pk %}">{{ category.name }}
+                                <span class="post-count">({{ category.num_posts }})</span>
+                            </a>
                         </li>
                             {% empty %}
                             暂无分类！
@@ -121,41 +125,19 @@
 
                 <div class="widget widget-tag-cloud">
                     <h3 class="widget-title">标签云</h3>
-                    <ul>
+                       {% get_tags as tag_list %}
+                  <ul>
+                      {% for tag in tag_list %}
                         <li>
-                            <a href="#">Django</a>
+                          <a href="{% url 'blog:tag' tag.pk %}">{{ tag.name }}</a>
                         </li>
-                        <li>
-                            <a href="#">Python</a>
-                        </li>
-                        <li>
-                            <a href="#">Java</a>
-                        </li>
-                        <li>
-                            <a href="#">笔记</a>
-                        </li>
-                        <li>
-                            <a href="#">文档</a>
-                        </li>
-                        <li>
-                            <a href="#">AngularJS</a>
-                        </li>
-                        <li>
-                            <a href="#">CSS</a>
-                        </li>
-                        <li>
-                            <a href="#">JavaScript</a>
-                        </li>
-                        <li>
-                            <a href="#">Snippet</a>
-                        </li>
-                        <li>
-                            <a href="#">jQuery</a>
-                        </li>
-                    </ul>
+                      {% empty %}
+                        暂无标签！
+                      {% endfor %}
+                  </ul>
                 </div>
                 <div class="rss">
-                    <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                    <a href="{% url 'rss' %}"><span class="ion-social-rss-outline"></span> RSS 订阅</a>
                 </div>
             </aside>
         </div>
@@ -165,9 +147,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="copyright">&copy 2017 - 采集自<a href="http://www.cssmoban.com/"
-                                                        target="_blank" title="模板之家">模板之家</a>
-                    - 由<a href="http://zmrenwu.com/" title="网页模板" target="_blank">追梦人物的博客</a>修改
+                <p class="copyright">&copy 模板来自网络
+                    - 感谢<a href="http://zmrenwu.com/" title="网页模板" target="_blank">追梦人物</a>和开源社区
                 </p>
             </div>
         </div>

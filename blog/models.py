@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.html import strip_tags
+
+import markdown
 
 
 class Category(models.Model):
@@ -35,12 +38,27 @@ class Post(models.Model):
     # 这里我们通过 ForeignKey 把文章和 User 关联了起来。
     # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # 新增 views 字段记录阅读量
+    views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'pk': self.pk})
+
+    def increase_views(self):
+        self.views += 1
+        # update_fields参数来告诉Django只更新数据库中views字段的值
+        self.save(update_fields=['views'])
+
+    def save(self, *args, **kwargs):
+        if not self.excerpt:
+            md = markdown.Markdown(extensions=['markdown.extensions.extra', 'markdown.extensions.codehilite'])
+            self.excerpt = strip_tags(md.convert(self.body))[:50]
+
+        # 调用父类的 save 方法将数据保存到数据库中
+        super(Post, self).save(*args, **kwargs)
 
     class Mata:
         # 指定 Post 的自然排序方式。即 Post.objects.all()
