@@ -31,7 +31,7 @@ class Post(models.Model):
     modified_time = models.DateTimeField()
     # 文章摘要，默认情况 CharField 不允许空值，blank=True 后允许
     excerpt = models.CharField(max_length=200, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     tags = models.ManyToManyField(Tag, blank=True)
     # 文章作者，这里 User 是从 django.contrib.auth.models 导入的。
     # django.contrib.auth 是 Django 内置的应用，专门用于处理网站用户的注册、登录等流程，User 是 Django 为我们已经写好的用户模型。

@@ -205,7 +205,9 @@ class CategoryView(IndexView):
 
 
 class PostDetailView(DetailView):
-    # 这些属性的含义和 ListView 是一样的
+    """
+    这些属性的含义和 ListView 是一样的
+    """
     model = Post
     template_name = 'blog/detail.html'
     context_object_name = 'post'
