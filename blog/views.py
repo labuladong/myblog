@@ -66,7 +66,7 @@ class IndexView(ListView):
     # object_list，请求页面的对象列表，和post_list等价。所以在模板中循环文章列表时可以选post_list ，也可以选object_list
 
     def get_queryset(self):
-        return Post.objects.order_by('-created_time')
+        return Post.objects.all().order_by('-created_time')
 
     def get_context_data(self, **kwargs):
         """
