@@ -65,6 +65,9 @@ class IndexView(ListView):
     # is_paginated，是否已分页。只有当分页后页面超过两页时才算已分页。
     # object_list，请求页面的对象列表，和post_list等价。所以在模板中循环文章列表时可以选post_list ，也可以选object_list
 
+    def get_queryset(self):
+        return Post.objects.order_by('-created_time')
+
     def get_context_data(self, **kwargs):
         """
         在视图函数中将模板变量传递给模板是通过给 render 函数的 context 参数传递一个字典实现的，
