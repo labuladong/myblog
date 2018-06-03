@@ -33,13 +33,11 @@
 ### 视图逻辑
 
 视图逻辑编写，即[ views 文件和 urls 映射 ](https://github.com/fudonglai/myblog/tree/master/blog)。比如你可以观察我的博客中不同功能区的url特点，不同功能区需要明确的url区分，然后对应到[templates](https://github.com/fudonglai/myblog/tree/master/blog/templates)中相应的HTML文件显示视图。
-
 这里就是后端需要做的事了，具体不用多说。
   
 ### 网页制作
 
 制作css样式和js渲染，属于前端，这个我不了解，我的css和js是[网上下载的模板](https://github.com/zmrenwu/django-blog-tutorial-templates)，觉得我这个模板好看的朋友可以去研究研究。
-
 HTML文件要尽量 **便于后端改造** 成[Django渲染模板](https://github.com/fudonglai/myblog/tree/master/blog/templates)(注意html中有很多{%  %} {{  }}这样的标记，这就是 Django 的HTML上下文映射)。
 
  ## 个人体会
