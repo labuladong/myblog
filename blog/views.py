@@ -2,12 +2,17 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.utils.text import slugify
 from django.db.models import Q
+from django.http.response import HttpResponse
 
 from .models import Post, Category, Tag
 from comments.forms import CommentForm
 
 import markdown
 from markdown.extensions.toc import TocExtension
+
+
+def temp(request):
+    return HttpResponse('暂未开发。\n联系QQ：347761683')
 
 
 def index(request):

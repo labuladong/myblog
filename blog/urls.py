@@ -13,5 +13,6 @@ urlpatterns = [
     path('category/<int:pk>/', views.category, name='category'),
     path('tag/<int:pk>/', views.TagView.as_view(), name='tag'),
     path('search/', views.search, name='search'),
+    path('temp/', views.temp, name='temp')
 
     ]
