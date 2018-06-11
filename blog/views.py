@@ -106,7 +106,8 @@ class IndexView(ListView):
         # 注意此时 context 字典中已有了显示分页导航条所需的数据。
         return context
 
-    def pagination_data(self, paginator, page, is_paginated):
+    @staticmethod
+    def pagination_data(paginator, page, is_paginated):
         if not is_paginated:
             # 如果没有分页，则无需显示分页导航条，不用任何分页导航条的数据，因此返回一个空的字典
             return {}
