@@ -32,6 +32,10 @@ def detail(request, pk):
                 'markdown.extensions.toc',
                 ])
     post.body = md.convert(post.body)
+
+    # 在这里使用了 duck typing，千万注意！
+    # 在这里使用了 duck typing，千万注意！
+    # 在这里使用了 duck typing，千万注意！
     post.toc = md.toc
 
     # 增加阅读数量统计

@@ -14,6 +14,7 @@
             </div>
         </header>
         <div class="entry-content clearfix">
+{#            |safe 使 Django 信任内容#}
             {{ post.body|safe }}
             <div class="widget-tag-cloud">
                 <ul>
@@ -36,7 +37,7 @@
         {% csrf_token %}
             <div class="row">
                 <div class="col-md-4">
-                    <label for="{{ form.name.id_for_label }}">名字：</label>
+                    <label for="{{ form.name.id_for_label }}">姓名：</label>
                     {{ form.name }}
                     {{ form.name.errors }}
                 </div>
@@ -46,7 +47,7 @@
                     {{ form.email.errors }}
                 </div>
                 <div class="col-md-4">
-                    <label for="{{ form.url.id_for_label }}">URL：</label>
+                    <label for="{{ form.url.id_for_label }}">URL(optional)：</label>
                     {{ form.url }}
                     {{ form.url.errors }}
                 </div>
