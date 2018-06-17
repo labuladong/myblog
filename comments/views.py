@@ -30,6 +30,7 @@ def post_comment(request, post_pk):
             # 检查到数据是合法的，调用表单的 save 方法保存数据到数据库，
             # commit=False 的作用是仅仅利用表单的数据生成 Comment 模型类的实例，但还不保存评论数据到数据库。
             comment.post = post
+            comment.ip = request.META.get('HTTP_X_FORWARD_FOR', request.META['REMOTE_ADDR'])
             comment.save()
         else:
             # 检查到数据不合法，重新渲染详情页，并且渲染表单的错误。

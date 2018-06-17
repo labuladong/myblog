@@ -7,7 +7,7 @@ class Comment(models.Model):
     url = models.URLField(blank=True)
     text = models.TextField()
     created_time = models.DateTimeField(auto_now_add=True)
-
+    ip = models.GenericIPAddressField(null=True)
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
 
     def __str__(self):

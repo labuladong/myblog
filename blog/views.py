@@ -27,10 +27,10 @@ def detail(request, pk):
     # 分别是 extra、codehilite、toc。extra 本身包含很多拓展，
     # 而 codehilite 是语法高亮拓展，这为我们后面的实现代码高亮功能提供基础，而 toc 则允许我们自动生成目录
     md = markdown.Markdown(extensions=[
-                'markdown.extensions.extra',
-                'markdown.extensions.codehilite',
-                'markdown.extensions.toc',
-                ])
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
+    ])
     post.body = md.convert(post.body)
 
     # 在这里使用了 duck typing，千万注意！
@@ -242,12 +242,13 @@ class PostDetailView(DetailView):
     def get_object(self, queryset=None):
         # 覆写 get_object 方法的目的是因为需要对 post 的 body 值进行渲染
         post = super(PostDetailView, self).get_object(queryset=None)
-        md = markdown.Markdown(extensions=[
-                              'markdown.extensions.extra',
-                              'markdown.extensions.codehilite',
-                              # 'markdown.extensions.toc',
-                              TocExtension(slugify=slugify)
-                            ])
+        md = markdown.Markdown(
+            extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+                # 'markdown.extensions.toc',
+                TocExtension(slugify=slugify)
+            ])
         post.body = md.convert(post.body)
         # markdown自动生成文章目录
         post.toc = md.toc
