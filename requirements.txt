@@ -1,4 +1,4 @@
 Django==2.0.12
 Markdown==2.6.11
-Pygments==2.2.0
+Pygments==2.7.4
 pytz==2018.4
