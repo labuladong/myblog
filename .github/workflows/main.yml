@@ -1,0 +1,13 @@
+name: Comment
+
+on: 
+  issue_comment:
+    types: [created, edited]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Comment on issue #${{ github.event.issue.number }}"
+          echo "Comment on issue #${{ github.event.issue }}"
